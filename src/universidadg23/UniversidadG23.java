@@ -10,7 +10,6 @@ public class UniversidadG23 {
     public static void main(String[] args) {
         // TODO code application logic here
     Conexion.conectarServidor();
-        System.out.println("Ingreso un mensaje para probar el GitHub");
     }
     
 }
