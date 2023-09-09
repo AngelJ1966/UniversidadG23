@@ -29,7 +29,10 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "idInscripcion=(" + idInscripcion + "), alumno=(" + alumno + "), materia=(" + materia + "), nota=(" + nota + ")";
+        String insc= idInscripcion+" "+alumno.getApellido()+", "+alumno.getNombre()+" "+
+                materia.getNombre();
+        return insc;
+        
     }
 
     public Inscripcion(double nota) {
