@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidadg23.entidades.Alumno;
 
@@ -153,7 +151,9 @@ public class AlumnoData {
             if (ps.executeUpdate() == 1) {
 
                 JOptionPane.showMessageDialog(null, "Alumno borrado");
-            }
+            } else {
+                 JOptionPane.showMessageDialog(null, "Alumno Inexistente");
+             }    
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos." + ex.getMessage());

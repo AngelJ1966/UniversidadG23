@@ -6,7 +6,6 @@
 package universidadg23.accesoADatos;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import universidadg23.entidades.Alumno;
 import universidadg23.entidades.Materia;
 
 /**
@@ -118,7 +116,9 @@ public class MateriaData {
             if (ps.executeUpdate() == 1) {
 
                 JOptionPane.showMessageDialog(null, "Materia borrada");
-            }
+            } else {
+                 JOptionPane.showMessageDialog(null, "Materia Inexistente");
+             }    
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos." + ex.getMessage());
