@@ -28,7 +28,7 @@ public class MateriaData {
     }
 
     public void guardarMateria(Materia materia) {
-        String sql = "INSERT INTO materia (nombre,año,estado)"
+        String sql = "INSERT INTO materia (nombre,año,estado) "
                 + "VALUES (?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -40,7 +40,7 @@ public class MateriaData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                materia.setIdMateria(rs.getInt("idMateria"));
+//                 materia.setIdMateria(rs.getInt("idMateria"));
                 JOptionPane.showMessageDialog(null, "Materia agregada exitosamente");
             }
         } catch (SQLException ex) {
@@ -51,8 +51,8 @@ public class MateriaData {
     public Materia buscarMateriaId (int idMat){
                 Materia materia = null;
 
-        String sql = "SELECT nombre,año"
-                + "FROM materia WHERE idMateria=" + idMat + "AND estado=1";
+        String sql = "SELECT nombre,año "
+                + "FROM materia WHERE idMateria=" + idMat + " AND estado=1";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ResultSet rs = ps.executeQuery();
@@ -81,7 +81,7 @@ public class MateriaData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                listadoMateria.add(new Materia(rs.getString("nombre"), rs.getInt("año"), true));
+                listadoMateria.add(new Materia(rs.getInt("idMateria"),rs.getString("nombre"), rs.getInt("año"), true));
             }
 
         } catch (SQLException ex) {
@@ -91,7 +91,7 @@ public class MateriaData {
     }
     
     public void modificarMateria (Materia materia){
-                String sql = "UPDATE materia SET nombre=?,año=? WHERE idAlumno=" + materia.getIdMateria();
+                String sql = "UPDATE materia SET nombre=?,año=? WHERE idMateria=" + materia.getIdMateria();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, materia.getNombre());

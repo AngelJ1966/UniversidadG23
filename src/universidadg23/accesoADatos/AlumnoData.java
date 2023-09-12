@@ -36,7 +36,7 @@ public class AlumnoData {
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
+//                alumno.setIdAlumno(rs.getInt("idAlumno"));
 
                 JOptionPane.showMessageDialog(null, "Alumno agregado exitosamente");
             }
@@ -52,8 +52,8 @@ public class AlumnoData {
     public Alumno buscarAlumnoPorId(int idAlu) {
         Alumno alumno = null;
 
-        String sql = "SELECT dni,apellido,nombre,fechaNac"
-                + "FROM alumno WHERE idAlumno=" + idAlu + "AND estado=1";
+        String sql = "SELECT dni,apellido,nombre,fechaNacimiento "
+                + "FROM alumno WHERE idAlumno=" + idAlu + " AND estado=1";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ResultSet rs = ps.executeQuery();
@@ -62,7 +62,7 @@ public class AlumnoData {
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
                 alumno.setIdAlumno(idAlu);
 
@@ -79,8 +79,8 @@ public class AlumnoData {
     public Alumno buscarAlumnoPorDni(int dniAlu) {
         Alumno alumno = null;
 
-        String sql = "SELECT idAlumno,apellido,nombre,fechaNac"
-                + "FROM alumno WHERE dni=" + dniAlu + "AND estado=1";
+        String sql = "SELECT idAlumno,apellido,nombre,fechaNacimiento "
+                + "FROM alumno WHERE dni=" + dniAlu + " AND estado=1";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ResultSet rs = ps.executeQuery();
@@ -89,7 +89,7 @@ public class AlumnoData {
                 alumno.setDni(dniAlu);
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
 
@@ -124,7 +124,7 @@ public class AlumnoData {
     }
 
     public void modificarAlumno(Alumno alumno) {
-        String sql = "UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaNac=? WHERE idAlumno=" + alumno.getIdAlumno();
+        String sql = "UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaNacimiento=? WHERE idAlumno=" + alumno.getIdAlumno();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, alumno.getDni());

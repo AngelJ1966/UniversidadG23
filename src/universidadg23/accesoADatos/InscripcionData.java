@@ -32,7 +32,7 @@ public class InscripcionData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
-               insc.setIdInscripcion(rs.getInt("idInscripcion"));
+//               insc.setIdInscripcion(rs.getInt("idInscripcion"));
                JOptionPane.showMessageDialog(null, "Inscripcion guardada exitosamente.");
             }
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class InscripcionData {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                inscripciones.add(new Inscripcion(alumnoData.buscarAlumnoPorId(rs.getInt("idAlumno")),
+                inscripciones.add(new Inscripcion(rs.getInt("idInscripcion"),alumnoData.buscarAlumnoPorId(rs.getInt("idAlumno")),
                         materiaData.buscarMateriaId(rs.getInt("idMateria")), rs.getDouble("nota")));
             }
         } catch(SQLException e) {
@@ -61,7 +61,7 @@ public class InscripcionData {
          try (PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                inscripcionesPorAlum.add(new Inscripcion(alumnoData.buscarAlumnoPorId(idAlum),
+                inscripcionesPorAlum.add(new Inscripcion(rs.getInt("idInscripcion"),alumnoData.buscarAlumnoPorId(idAlum),
                         materiaData.buscarMateriaId(rs.getInt("idMateria")), rs.getDouble("nota")));
             }
         } catch(SQLException e) {
