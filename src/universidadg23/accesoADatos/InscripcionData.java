@@ -72,12 +72,12 @@ public class InscripcionData {
     
     public List<Materia> obtenerMateriasCursadas(int idAlum) {
         List<Materia> materiasCursadas = new ArrayList<>();
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE "
-                + "inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = " + idAlum;
+        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON (materia.idMateria=inscripcion.idMateria) "
+                + "WHERE inscripcion.idAlumno = " + idAlum;
         try(PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                materiasCursadas.add(new Materia(rs.getInt("inscripcion.idMateria"), rs.getString("nombre"),
+                materiasCursadas.add(new Materia(rs.getInt("idMateria"), rs.getString("nombre"),
                         rs.getInt("año"), true));
             }
         } catch(SQLException e) {
@@ -88,8 +88,8 @@ public class InscripcionData {
     
      public List<Materia> obtenerMateriasNoCursadas(int idAlum) {
         List<Materia> materiasCursadas = new ArrayList<>();
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia WHERE "
-                + "inscripcion.idMateria NOT materia.idMateria AND inscripcion.idAlumno = " + idAlum;
+        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON (materia.idMateria!=inscripcion.idMateria) "
+                + "WHERE inscripcion.idAlumno != " + idAlum;
         try(PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -133,7 +133,7 @@ public class InscripcionData {
      }
      
      public void actualizarNota(int idAlum, int idMat, double nota) {
-         String sql = "UPDATE nota = ? FROM inscripcion WHERE idMateria = ? AND idAlumno = ?";
+         String sql = "UPDATE inscripcion SET nota = ? WHERE idMateria = ? AND idAlumno = ?";
          try(PreparedStatement ps = con.prepareStatement(sql)) {
              ps.setDouble(1, nota);
              ps.setInt(2, idMat);
