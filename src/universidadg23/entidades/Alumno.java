@@ -35,8 +35,7 @@ public class Alumno {
     
     @Override
     public String toString() {
-        return "idAlumno=("+idAlumno+"), dni=(" + dni + "), apellido=(" + apellido + "), nombre=(" + nombre
-                + "), fechaNac=(" + fechaNac + "), estado=(" + estado +")";
+        return dni + ", " + apellido + " " + nombre;
     }
 
     public int getIdAlumno() {

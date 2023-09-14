@@ -38,6 +38,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jmFormulario = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -55,7 +56,6 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("jMenu5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
 
         javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
@@ -73,7 +73,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Alumno");
 
-        jmFormulario.setText("Formulario");
+        jmFormulario.setText("Formulario Alumnos");
         jmFormulario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jmFormularioMouseClicked(evt);
@@ -89,11 +89,25 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Materia");
+
+        jMenuItem7.setText("Formulario Materias");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Administracion");
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.setText("Formulario Inscripciones");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
@@ -140,18 +154,12 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
-        // Al presionar el JMSalida se cierra el programa
+
         
     }//GEN-LAST:event_jmSalirMouseClicked
 
     private void jmFormularioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmFormularioMouseClicked
-        // Al presionar el miFormulario abre el JPanel Formulario
-        jdEscritorio.removeAll();
-        jdEscritorio.repaint();
-        FormularioAlumnoView fav = new FormularioAlumnoView();
-        fav.setVisible(true);
-        jdEscritorio.add(fav);
-        jdEscritorio.moveToFront(fav);
+        
     }//GEN-LAST:event_jmFormularioMouseClicked
 
     private void jmFormularioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormularioActionPerformed
@@ -165,14 +173,34 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmFormularioActionPerformed
 
     private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
-        // Al precionar el Menu Salida se cierra el Jframe MenuPrincipal
+
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // Al precionar el Menu Salida se cierra el Jframe MenuPrincipal
+        // Al presionar el Menu Salida se cierra el Jframe MenuPrincipal
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // Al presionar el MIFormulario Materias abre el JPanel FormularioMateriaView
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        FormularioMateriaView fmv = new FormularioMateriaView();
+        fmv.setVisible(true);
+        jdEscritorio.add(fmv);
+        jdEscritorio.moveToFront(fmv);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // Al presionar el MIFormulario Inscripciones abre el JPanel FormularioInscripcionView
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        FormularioInscripcionView fiv = new FormularioInscripcionView();
+        fiv.setVisible(true);
+        jdEscritorio.add(fiv);
+        jdEscritorio.moveToFront(fiv);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,6 +251,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JDesktopPane jdEscritorio;
     private javax.swing.JMenuItem jmFormulario;
     private javax.swing.JMenu jmSalir;

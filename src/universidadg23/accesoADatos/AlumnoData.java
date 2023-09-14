@@ -80,7 +80,7 @@ public class AlumnoData {
         Alumno alumno = null;
 
         String sql = "SELECT idAlumno,apellido,nombre,fechaNacimiento "
-                + "FROM alumno WHERE dni=" + dniAlu + " AND estado=1";
+                + "FROM alumno WHERE dni=" + dniAlu + " AND estado=1 ";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ResultSet rs = ps.executeQuery();

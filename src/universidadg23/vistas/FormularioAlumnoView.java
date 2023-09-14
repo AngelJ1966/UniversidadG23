@@ -66,6 +66,11 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +208,7 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        AlumnoData alumData = new AlumnoData ();
+        AlumnoData alumData = new AlumnoData();
         alum = alumData.buscarAlumnoPorDni(Integer.parseInt(jtDNI.getText()));
         jtNombre.setText(alum.getNombre());
         jtApellido.setText(alum.getApellido());
@@ -216,7 +221,7 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbEstadoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // Al precionar el boton jbSalida se cierra el JInternar frame de Formulario
+        // Al presionar el boton jbSalida se cierra el JInternar frame de Formulario
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
@@ -234,15 +239,19 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // Al hacer click sobre el JBModificar se realiza un cambio de acuerdo a los datos de los TField
         // Se produce una busqueda del alumno por dni para realizar la posterior modificacion
-        
         AlumnoData alumData = new AlumnoData();
-        
         Alumno alumno1 = new Alumno (alum.getIdAlumno(),Integer.parseInt(jtDNI.getText()),jtApellido.getText(),jtNombre.getText(),jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),jcbEstado.isSelected());
 //        Alumno alumno = alum;
         
 
         alumData.modificarAlumno(alumno1);
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // Al presionar el boton JBEliminar se da la baja logica del alumno
+        AlumnoData alumData = new AlumnoData();
+        alumData.eliminarAlumno(alum.getIdAlumno());
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
