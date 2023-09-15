@@ -17,12 +17,18 @@ import universidadg23.entidades.Alumno;
  * @author jonac
  */
 public class FormularioAlumnoView extends javax.swing.JInternalFrame {
+
     private Alumno alum;
+    private boolean activo;
+    private String accion;
+
     /**
      * Creates new form Formulario
      */
     public FormularioAlumnoView() {
         initComponents();
+        activo = true;
+        toggleFormulario();
     }
 
     /**
@@ -52,6 +58,8 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         jtNombre = new javax.swing.JTextField();
         jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jcbEstado = new javax.swing.JCheckBox();
+        jbAceptar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -109,36 +117,49 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbAceptar.setText("Aceptar");
+        jbAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAceptarActionPerformed(evt);
+            }
+        });
+
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(155, 155, 155))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(jbNuevo)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbModificar)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbEliminar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(jbSalir))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jtDNI)
-                                .addGap(5, 5, 5)
-                                .addComponent(jbBuscar)))
+                        .addComponent(jtDNI)
+                        .addGap(5, 5, 5)
+                        .addComponent(jbBuscar)
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                         .addGap(145, 145, 145))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,11 +167,19 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
                                 .addComponent(jtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                                 .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jcbEstado))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(155, 155, 155))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbEliminar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbSalir))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbAceptar)
+                                .addGap(31, 31, 31)
+                                .addComponent(jbCancelar)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,21 +202,25 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jcbEstado)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbNuevo)
                             .addComponent(jbEliminar)
                             .addComponent(jbSalir)
                             .addComponent(jbModificar))
-                        .addGap(16, 16, 16))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jcbEstado)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbAceptar)
+                            .addComponent(jbCancelar))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +240,31 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void toggleFormulario() {
+        if (activo) {
+            activo = false;
+        } else {
+            activo = true;
+        }
+        jtApellido.setEnabled(activo);
+        jtNombre.setEnabled(activo);
+        jdcFechaNacimiento.setEnabled(activo);
+        jcbEstado.setEnabled(activo);
+        jbAceptar.setEnabled(activo);
+        jbNuevo.setEnabled(!activo);
+        jbModificar.setEnabled(activo);
+        jbEliminar.setEnabled(activo);
+        jbCancelar.setEnabled(activo);
+    }
+
+    public void vaciarCampos() {
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jtDNI.setText("");
+        jdcFechaNacimiento.setCalendar(null);
+        jcbEstado.setSelected(false);
+    }
+
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         AlumnoData alumData = new AlumnoData();
         alum = alumData.buscarAlumnoPorDni(Integer.parseInt(jtDNI.getText()));
@@ -214,6 +272,8 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         jtApellido.setText(alum.getApellido());
         jcbEstado.setSelected(alum.isEstado());
         jdcFechaNacimiento.setDate(Date.valueOf(alum.getFechaNac()));
+        jbModificar.setEnabled(true);
+        jbEliminar.setEnabled(true);
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
@@ -227,32 +287,73 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // Precion sobre el JbNuevo obtiene los datos de los JTfield para crear un alumno y asi enviarlo a la base de datos
-        AlumnoData alumdata = new AlumnoData();
-        try{
-        Alumno alum = new Alumno (Integer.parseInt(jtDNI.getText()),jtApellido.getText(), jtNombre.getText(), jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), jcbEstado.isSelected());
-        alumdata.guardarAlumno(alum);
-        }catch(NumberFormatException nf){
-            JOptionPane.showMessageDialog(this, "Campos vacios y/o error de formato");
-        }
+        toggleFormulario();
+        vaciarCampos();
+        accion = "nuevo";
+//        AlumnoData alumdata = new AlumnoData();
+//        try{
+//        Alumno alum = new Alumno (Integer.parseInt(jtDNI.getText()),jtApellido.getText(), jtNombre.getText(), jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), jcbEstado.isSelected());
+//        alumdata.guardarAlumno(alum);
+//        }catch(NumberFormatException | NullPointerException nf){
+//            JOptionPane.showMessageDialog(this, "Campos vacios y/o error de formato");
+//        }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // Al hacer click sobre el JBModificar se realiza un cambio de acuerdo a los datos de los TField
         // Se produce una busqueda del alumno por dni para realizar la posterior modificacion
-        AlumnoData alumData = new AlumnoData();
-        Alumno alumno1 = new Alumno (alum.getIdAlumno(),Integer.parseInt(jtDNI.getText()),jtApellido.getText(),jtNombre.getText(),jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),jcbEstado.isSelected());
-//        Alumno alumno = alum;
-        
-
-        alumData.modificarAlumno(alumno1);
+        toggleFormulario();
+        accion = "modificar";
+//        AlumnoData alumData = new AlumnoData();
+//        Alumno alumno1 = new Alumno(alum.getIdAlumno(), Integer.parseInt(jtDNI.getText()), jtApellido.getText(), jtNombre.getText(), jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), jcbEstado.isSelected());
+////        Alumno alumno = alum;
+//
+//        alumData.modificarAlumno(alumno1);
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // Al presionar el boton JBEliminar se da la baja logica del alumno
         AlumnoData alumData = new AlumnoData();
         alumData.eliminarAlumno(alum.getIdAlumno());
+        vaciarCampos();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
+        AlumnoData alumData = new AlumnoData();
+        Alumno alumno1;
+        switch (accion) {
+            case "nuevo":
+                try {
+                    alumno1 = new Alumno(Integer.parseInt(jtDNI.getText()), jtApellido.getText(),
+                            jtNombre.getText(), jdcFechaNacimiento.getDate()
+                                    .toInstant()
+                                    .atZone(ZoneId.systemDefault())
+                                    .toLocalDate(),
+                            jcbEstado.isSelected());
+                    alumData.guardarAlumno(alumno1);
+                } catch (NumberFormatException | NullPointerException nf) {
+                    JOptionPane.showMessageDialog(this, "Campos vacios y/o error de formato");
+                }
+                break;
+            case "modificar":
+                alumno1 = new Alumno(alum.getIdAlumno(), Integer.parseInt(jtDNI.getText()),
+                        jtApellido.getText(), jtNombre.getText(), jdcFechaNacimiento.getDate()
+                                .toInstant()
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalDate(),
+                        jcbEstado.isSelected());
+                alumData.modificarAlumno(alumno1);
+        }
+        toggleFormulario();
+        vaciarCampos();
+    }//GEN-LAST:event_jbAceptarActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+         toggleFormulario();
+        vaciarCampos();
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
@@ -263,7 +364,9 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbNuevo;
