@@ -23,7 +23,11 @@ import universidadg23.entidades.Materia;
  * @author jonac
  */
 public class FormularioInscripcionView extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo=new DefaultTableModel(){
+        public boolean isCellEditable(int fila,int columna){
+            return false;
+        }
+    };
     private DefaultComboBoxModel comboModel = new DefaultComboBoxModel();
     private String accion;
     /**

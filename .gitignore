@@ -26,3 +26,5 @@ nbproject/
 build.xml
 manifest.mf
 /dist/
+*.properties
+build/built-jar.properties
