@@ -88,12 +88,12 @@ public class InscripcionData {
     
      public List<Materia> obtenerMateriasNoCursadas(int idAlum) {
         List<Materia> materiasCursadas = new ArrayList<>();
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON (materia.idMateria!=inscripcion.idMateria) "
-                + "WHERE inscripcion.idAlumno != " + idAlum;
+        String sql = "SELECT * FROM materia WHERE estado=1 AND idMateria not in (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
         try(PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idAlum);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                materiasCursadas.add(new Materia(rs.getInt("inscripcion.idMateria"), rs.getString("nombre"),
+                materiasCursadas.add(new Materia(rs.getInt("materia.idMateria"), rs.getString("nombre"),
                         rs.getInt("año"), true));
             }
         } catch(SQLException e) {

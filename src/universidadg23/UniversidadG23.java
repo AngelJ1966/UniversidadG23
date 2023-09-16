@@ -31,6 +31,7 @@ public class UniversidadG23 {
         
         inscdata.actualizarNota(5, 1, 8);
         
+        System.out.println(inscdata.obtenerMateriasNoCursadas(4));
     }
     
 }
