@@ -29,9 +29,7 @@ public class UniversidadG23 {
         //System.out.println(matdata.buscarMateriaId(2));
         //    inscdata.guardarInscripcion(new Inscripcion(alumdata.buscarAlumnoPorId(5), matdata.buscarMateriaId(2), 0));
         
-        inscdata.actualizarNota(5, 1, 8);
-        
-        System.out.println(inscdata.obtenerMateriasNoCursadas(4));
+        System.out.println(alumdata.buscarAlumnoPorDni(14456987));
     }
     
 }
