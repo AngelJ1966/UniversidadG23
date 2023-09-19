@@ -259,15 +259,25 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
     }
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        AlumnoData alumData = new AlumnoData();
+        try {
+            AlumnoData alumData = new AlumnoData();
         alum = alumData.buscarAlumnoPorDni(Integer.valueOf(jtDNI.getText()));
-        jtNombre.setText(alum.getNombre());
-        jtApellido.setText(alum.getApellido());
-        jcbEstado.setSelected(alum.isEstado());
-        jdcFechaNacimiento.setDate(Date.valueOf(alum.getFechaNac()));
-        jbModificar.setEnabled(true);
-        if(alum.isEstado()) jbEliminar.setEnabled(true);
-        buscar = true;
+        if (alum!= null){
+            jtNombre.setText(alum.getNombre());
+            jtApellido.setText(alum.getApellido());
+            jcbEstado.setSelected(alum.isEstado());
+            jdcFechaNacimiento.setDate(Date.valueOf(alum.getFechaNac()));
+            jbModificar.setEnabled(true);
+            if(alum.isEstado()) jbEliminar.setEnabled(true);
+            buscar = true;
+            }else {
+            buscar = false;
+        }
+        
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "No se permiten campos vacios y/o caracter invalidos");
+        }
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed

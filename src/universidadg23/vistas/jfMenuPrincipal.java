@@ -5,6 +5,9 @@
  */
 package universidadg23.vistas;
 
+import java.awt.Dimension;
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author jonac
@@ -16,6 +19,8 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
      */
     public jfMenuPrincipal() {
         initComponents();
+        setSize(920,780);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,7 +46,9 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMNotas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMAlumnosXMateria = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
 
@@ -56,7 +63,8 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("jMenu5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+
+        jdEscritorio.setMinimumSize(new java.awt.Dimension(400, 0));
 
         javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
         jdEscritorio.setLayout(jdEscritorioLayout);
@@ -110,9 +118,21 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem3);
 
+        jMNotas.setText("Carga de notas");
+        jMNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMNotasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMNotas);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultas");
+
+        jMAlumnosXMateria.setText("Alumnos por Materia");
+        jMenu4.add(jMAlumnosXMateria);
+
         jMenuBar1.add(jMenu4);
 
         jmSalir.setText("Salida");
@@ -143,11 +163,11 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdEscritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jdEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdEscritorio)
+            .addComponent(jdEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -167,6 +187,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
         FormularioAlumnoView fav = new FormularioAlumnoView();
+        centrarFrame(fav);
         fav.setVisible(true);
         jdEscritorio.add(fav);
         jdEscritorio.moveToFront(fav);
@@ -202,6 +223,17 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.moveToFront(fiv);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMNotasActionPerformed
+        // Al presionar el MIFormulario Inscripciones abre el JPanel FormularioCargadeNotasView
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        FormularioCargadeNotasView fcnv = new FormularioCargadeNotasView();
+        centrarFrame(fcnv);
+        fcnv.setVisible(true);
+        jdEscritorio.add(fcnv);
+        jdEscritorio.moveToFront(fcnv);
+    }//GEN-LAST:event_jMNotasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,9 +268,18 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void centrarFrame(JInternalFrame form){
+        Dimension desktopSize = jdEscritorio.getSize();
+        int x = (desktopSize.width - form.getWidth()) / 2;
+        int y = (desktopSize.height - form.getHeight()) / 2;
+        form.setLocation(x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenuItem jMAlumnosXMateria;
+    private javax.swing.JMenuItem jMNotas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
