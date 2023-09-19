@@ -131,6 +131,11 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Consultas");
 
         jMAlumnosXMateria.setText("Alumnos por Materia");
+        jMAlumnosXMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMAlumnosXMateriaActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMAlumnosXMateria);
 
         jMenuBar1.add(jMenu4);
@@ -233,6 +238,17 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.add(fcnv);
         jdEscritorio.moveToFront(fcnv);
     }//GEN-LAST:event_jMNotasActionPerformed
+
+    private void jMAlumnosXMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAlumnosXMateriaActionPerformed
+        // al presionar el jMenuItem [consulta x materia] abre el jInternalFrame formulario consulta alumno por materia 
+         jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        FormularioConsultaAlumnoXMateria fcam = new FormularioConsultaAlumnoXMateria();
+        centrarFrame(fcam);
+        fcam.setVisible(true);
+        jdEscritorio.add(fcam);
+        jdEscritorio.moveToFront(fcam);
+    }//GEN-LAST:event_jMAlumnosXMateriaActionPerformed
 
     /**
      * @param args the command line arguments
