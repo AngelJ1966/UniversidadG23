@@ -55,10 +55,6 @@ public class FormularioConsultaAlumnoXMateria extends javax.swing.JInternalFrame
         jtAlumnos = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("LISTADO DE ALUMNOS POR MATERIA");
 

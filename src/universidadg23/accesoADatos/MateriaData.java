@@ -126,5 +126,18 @@ public class MateriaData {
         }
     }
             
-    
+    public int nextID() {
+        String sql = "SELECT idMateria FROM materia";
+        int lastKey = 0;
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lastKey = rs.getInt("idMateria");
+            }
+        } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos." + e.getMessage());
+        }
+        
+        return lastKey + 1;
+    }
 }

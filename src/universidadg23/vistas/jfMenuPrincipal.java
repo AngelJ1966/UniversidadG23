@@ -213,6 +213,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
         FormularioMateriaView fmv = new FormularioMateriaView();
+        centrarFrame(fmv);
         fmv.setVisible(true);
         jdEscritorio.add(fmv);
         jdEscritorio.moveToFront(fmv);
@@ -223,6 +224,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
         FormularioInscripcionView fiv = new FormularioInscripcionView();
+        centrarFrame(fiv);
         fiv.setVisible(true);
         jdEscritorio.add(fiv);
         jdEscritorio.moveToFront(fiv);

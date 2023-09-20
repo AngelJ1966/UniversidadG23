@@ -64,11 +64,6 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
         jtDNI = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Carga de Notas");
 
