@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadg23.accesoADatos.AlumnoData;
+import universidadg23.accesoADatos.Validaciones;
 import universidadg23.entidades.Alumno;
 
 /**
@@ -111,12 +112,27 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Fecha Nac");
 
-        jdcFechaNacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jdcFechaNacimientoMouseClicked(evt);
+        jtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtDNIKeyReleased(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jdcFechaNacimientoMouseReleased(evt);
+        });
+
+        jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyReleased(evt);
+            }
+        });
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
+            }
+        });
+
+        jdcFechaNacimiento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcFechaNacimientoPropertyChange(evt);
             }
         });
 
@@ -309,7 +325,7 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         // Precion sobre el JbNuevo obtiene los datos de los JTfield para crear un alumno y asi enviarlo a la base de datos
         jtNombre.setEnabled(true);
         jtApellido.setEnabled(true);
-        jcbEstado.setEnabled(true);
+        jcbEstado.setEnabled(false);
         jdcFechaNacimiento.setEnabled(true);
         jbAceptar.setEnabled(true);
         jbCancelar.setEnabled(true);
@@ -320,6 +336,7 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
 
         vaciarCampos();
         accion = "nuevo";
+        jcbEstado.setSelected(true);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -354,30 +371,44 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
         AlumnoData alumData = new AlumnoData();
-        Alumno alumno1;
+        Alumno alumno1=null;
         switch (accion) {
             case "nuevo":
                 try {
-                    alumno1 = new Alumno(Integer.parseInt(jtDNI.getText()), jtApellido.getText(),
+
+                    if(Validaciones.validacionDNI(jtDNI.getText())&& Validaciones.validacionApellidoAlumno(jtApellido.getText())&& Validaciones.validacionNombreAlumno(jtNombre.getText())){
+                            alumno1 = new Alumno(Integer.parseInt(jtDNI.getText()), jtApellido.getText(),
                             jtNombre.getText(), jdcFechaNacimiento.getDate()
                             .toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate(),
                             jcbEstado.isSelected());
+                    }
                     alumData.guardarAlumno(alumno1);
+                    
                 } catch (NumberFormatException | NullPointerException nf) {
                     JOptionPane.showMessageDialog(this, "Campos vacios y/o error de formato");
                 }
                 break;
             case "modificar":
+                try{
+                if(Validaciones.validacionDNI(jtDNI.getText())&& Validaciones.validacionApellidoAlumno(jtApellido.getText())&& Validaciones.validacionNombreAlumno(jtNombre.getText())){
                 alumno1 = new Alumno(alum.getIdAlumno(), Integer.parseInt(jtDNI.getText()),
                         jtApellido.getText(), jtNombre.getText(), jdcFechaNacimiento.getDate()
                         .toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate(),
                         jcbEstado.isSelected());
+                }
                 alumData.modificarAlumno(alumno1);
+                }catch(NullPointerException np){
+                    JOptionPane.showMessageDialog(this, "Campos vacios y/o error de formato");
+                }
+                break;
         }
+        
+        if(alumno1!=null){
+            vaciarCampos();
         jtNombre.setEnabled(false);
         jtApellido.setEnabled(false);
         jcbEstado.setEnabled(false);
@@ -388,8 +419,7 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         jbEliminar.setEnabled(false);
         jbBuscar.setEnabled(true);
         jbNuevo.setEnabled(true);
-
-        vaciarCampos();
+        }
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
@@ -403,21 +433,40 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
         jbEliminar.setEnabled(false);
         jbBuscar.setEnabled(true);
         jbNuevo.setEnabled(true);
-                
+
         vaciarCampos();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
-    private void jdcFechaNacimientoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcFechaNacimientoMouseReleased
-    if(jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).getYear() > (LocalDate.now().getYear()-16)){
-        jdcFechaNacimiento.setCalendar(null);
-        JOptionPane.showMessageDialog(this, "Fecha invalida. El alumno debe ser mayor de 16 años.");
-    }
-            
-    }//GEN-LAST:event_jdcFechaNacimientoMouseReleased
+    private void jdcFechaNacimientoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcFechaNacimientoPropertyChange
+        // Comentar Luego
+        if (jdcFechaNacimiento.isEnabled() && jdcFechaNacimiento.getCalendar() != null) {
+            if (jdcFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() > (LocalDate.now().getYear() - 16)) {
+                jdcFechaNacimiento.setCalendar(null);
+                JOptionPane.showMessageDialog(this, "Fecha invalida. El alumno debe ser mayor de 16 años.");
+            }
+        }
+    }//GEN-LAST:event_jdcFechaNacimientoPropertyChange
 
-    private void jdcFechaNacimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcFechaNacimientoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jdcFechaNacimientoMouseClicked
+    private void jtDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDNIKeyReleased
+        if (!jtDNI.getText().equals("") && Validaciones.validacionInmediataCaracteres(jtDNI.getText(), 1) == false) {
+            JOptionPane.showMessageDialog(this, "Solo se permiten numeros");
+            jtDNI.setText("");
+        }
+    }//GEN-LAST:event_jtDNIKeyReleased
+
+    private void jtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyReleased
+        if (!jtApellido.getText().equals("") && Validaciones.validacionInmediataCaracteres(jtApellido.getText(), 2) == false) {
+            JOptionPane.showMessageDialog(this, "Caracter invalido");
+            jtApellido.setText("");
+        }
+    }//GEN-LAST:event_jtApellidoKeyReleased
+
+    private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+        if (!jtNombre.getText().equals("") && Validaciones.validacionInmediataCaracteres(jtNombre.getText(), 2) == false) {
+            JOptionPane.showMessageDialog(this, "Caracter invalido");
+            jtNombre.setText("");
+        }
+    }//GEN-LAST:event_jtNombreKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -442,4 +491,6 @@ public class FormularioAlumnoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtDNI;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+    
+
 }
