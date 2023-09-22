@@ -92,11 +92,12 @@ public class MateriaData {
     
     
     public void modificarMateria (Materia materia){
-                String sql = "UPDATE materia SET nombre=?,año=? WHERE idMateria=" + materia.getIdMateria();
+                String sql = "UPDATE materia SET nombre=?,año=?,estado=? WHERE idMateria=" + materia.getIdMateria();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
+            ps.setBoolean(3,materia.isEstado());
             if (ps.executeUpdate() == 1) {
 
                 JOptionPane.showMessageDialog(null, "Modificación exitosa");

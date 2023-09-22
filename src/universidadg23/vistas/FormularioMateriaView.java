@@ -5,6 +5,7 @@
  */
 package universidadg23.vistas;
 
+import javax.swing.JOptionPane;
 import universidadg23.accesoADatos.MateriaData;
 import universidadg23.entidades.Materia;
 
@@ -301,7 +302,7 @@ public class FormularioMateriaView extends javax.swing.JInternalFrame {
         } else {
             matData.modificarMateria(new Materia(Integer.parseInt(jtCodigo.getText()), jtNombre.getText(), Integer.parseInt(jtAnio.getText()), jcbEstado.isSelected()));
             accion = "";
-        }
+         }
         vaciarCampos();
         vistaPorDefecto();
     }//GEN-LAST:event_jbAceptarActionPerformed

@@ -53,7 +53,7 @@ public class AlumnoData {
         Alumno alumno = null;
 
         String sql = "SELECT dni,apellido,nombre,fechaNacimiento "
-                + "FROM alumno WHERE idAlumno=" + idAlu + " AND estado=1";
+                + "FROM alumno WHERE idAlumno=" + idAlu ;
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ResultSet rs = ps.executeQuery();
@@ -122,13 +122,14 @@ public class AlumnoData {
     }
 
     public void modificarAlumno(Alumno alumno) {
-        String sql = "UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaNacimiento=? WHERE idAlumno=" + alumno.getIdAlumno();
+        String sql = "UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaNacimiento=?,estado=? WHERE idAlumno=" + alumno.getIdAlumno();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
+            ps.setBoolean(5, alumno.isEstado());
             if (ps.executeUpdate() == 1) {
                 JOptionPane.showMessageDialog(null, "Modificación exitosa");
             } else {
