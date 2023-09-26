@@ -5,11 +5,15 @@
  */
 package universidadg23.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadg23.accesoADatos.AlumnoData;
 import universidadg23.accesoADatos.InscripcionData;
@@ -23,17 +27,21 @@ import universidadg23.entidades.Materia;
  * @author jonac
  */
 public class FormularioInscripcionView extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo=new DefaultTableModel(){
-        public boolean isCellEditable(int fila,int columna){
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
             return false;
         }
     };
     private DefaultComboBoxModel comboModel = new DefaultComboBoxModel();
     private String accion;
+    FondoPanel fondo = new FondoPanel();
+
     /**
      * Creates new form FormularioInscripcionView
      */
     public FormularioInscripcionView() {
+        this.setContentPane(fondo);
         initComponents();
         iniTable();
         iniComboBox();
@@ -140,63 +148,66 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbInscribir)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jbAnularInsc)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jbSalir))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jbInscribir)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jbAnularInsc)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbSalir)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrbMatInsc)
-                                .addGap(18, 18, 18)
-                                .addComponent(jrbMatNoInsc)
-                                .addGap(69, 69, 69)))
-                        .addContainerGap(30, Short.MAX_VALUE))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jSeparator1)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(115, 115, 115))
+                .addComponent(jrbMatInsc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jrbMatNoInsc)
+                .addGap(70, 70, 70))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(9, 9, 9)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jrbMatNoInsc)
-                    .addComponent(jrbMatInsc))
-                .addGap(11, 11, 11)
+                    .addComponent(jrbMatInsc)
+                    .addComponent(jrbMatNoInsc))
+                .addGap(22, 22, 22)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAnularInsc)
                     .addComponent(jbInscribir)
+                    .addComponent(jbAnularInsc)
                     .addComponent(jbSalir))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -223,16 +234,16 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
         // Rellena la JTableMaterias con aquellas Materias en las cuales el alumno se encuentra inscripto llamando al metodo
         // obtenerMateriasCursadas de la clase InscripcionData
         tableClean();
-        accion="MateriaInscripta";
-        List <Materia> materiasInsc = new ArrayList<>();
+        accion = "MateriaInscripta";
+        List<Materia> materiasInsc = new ArrayList<>();
         InscripcionData inscDat = new InscripcionData();
         jrbMatNoInsc.setSelected(false);
         jbInscribir.setEnabled(false);
-        Alumno alumno=(Alumno)jcbAlumnos.getSelectedItem();
-        
-        materiasInsc= inscDat.obtenerMateriasCursadas(alumno.getIdAlumno());
+        Alumno alumno = (Alumno) jcbAlumnos.getSelectedItem();
+
+        materiasInsc = inscDat.obtenerMateriasCursadas(alumno.getIdAlumno());
         for (Materia materia : materiasInsc) {
-            modelo.addRow(new Object[]{materia.getIdMateria(),materia.getNombre(),materia.getAnio()});
+            modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnio()});
         }
     }//GEN-LAST:event_jrbMatInscActionPerformed
 
@@ -240,15 +251,15 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
         // Rellena la JTableMaterias con aquellas Materias a las que el alumno no se encuentra inscripto, esto llamando al metodo
         // ObtenerMateriasNoCursadas de la Clase InscripcionData
         tableClean();
-            accion= "MateriaNoInscripta";
-        List <Materia> materiasNoInsc = new ArrayList<>();
+        accion = "MateriaNoInscripta";
+        List<Materia> materiasNoInsc = new ArrayList<>();
         InscripcionData inscDat = new InscripcionData();
         jrbMatInsc.setSelected(false);
         jbAnularInsc.setEnabled(false);
-        Alumno alumno=(Alumno)jcbAlumnos.getSelectedItem();
-        materiasNoInsc= inscDat.obtenerMateriasNoCursadas(alumno.getIdAlumno());
+        Alumno alumno = (Alumno) jcbAlumnos.getSelectedItem();
+        materiasNoInsc = inscDat.obtenerMateriasNoCursadas(alumno.getIdAlumno());
         for (Materia materia : materiasNoInsc) {
-            modelo.addRow(new Object[]{materia.getIdMateria(),materia.getNombre(),materia.getAnio()});
+            modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnio()});
         }
     }//GEN-LAST:event_jrbMatNoInscActionPerformed
 
@@ -257,9 +268,9 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
         jbInscribir.setEnabled(false);
         InscripcionData inscData = new InscripcionData();
         Inscripcion insc = new Inscripcion();
-        MateriaData matData=new MateriaData();
+        MateriaData matData = new MateriaData();
         insc.setAlumno((Alumno) jcbAlumnos.getSelectedItem());
-        insc.setMateria(matData.buscarMateriaId((int)modelo.getValueAt(jtMaterias.getSelectedRow(),0)));
+        insc.setMateria(matData.buscarMateriaId((int) modelo.getValueAt(jtMaterias.getSelectedRow(), 0)));
         insc.setNota(0);
         inscData.guardarInscripcion(insc);
         tableClean();
@@ -271,7 +282,7 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
         // en la JTMaterias
         jbAnularInsc.setEnabled(false);
         InscripcionData inscData = new InscripcionData();
-        inscData.borrarInscripcionMateriaAlumno(((Alumno) jcbAlumnos.getSelectedItem()).getIdAlumno(), (int)modelo.getValueAt(jtMaterias.getSelectedRow(),0));
+        inscData.borrarInscripcionMateriaAlumno(((Alumno) jcbAlumnos.getSelectedItem()).getIdAlumno(), (int) modelo.getValueAt(jtMaterias.getSelectedRow(), 0));
         // Se recupera el objeto de tipo Alumno seleccionado en la JCBAlumnos y se recupera el entero del dato almacenado en la fila seleccionada y columna = 0
         tableClean();
         jrbMatInsc.setSelected(false);
@@ -280,14 +291,20 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
     private void jtMateriasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtMateriasMouseReleased
         // Al seleccionar una fila se corrobora que este seleccionada y se habilita el boton JBInscribir o JBAnularInsc
         // segun el JRB seleccionado anteriormente
-        if(jtMaterias.isRowSelected(jtMaterias.getSelectedRow())==true){
-            switch(accion){
-                case "MateriaInscripta": jbAnularInsc.setEnabled(true);jbInscribir.setEnabled(false);break;
-                case "MateriaNoInscripta":jbInscribir.setEnabled(true);jbAnularInsc.setEnabled(false);break;
+        if (jtMaterias.isRowSelected(jtMaterias.getSelectedRow()) == true) {
+            switch (accion) {
+                case "MateriaInscripta":
+                    jbAnularInsc.setEnabled(true);
+                    jbInscribir.setEnabled(false);
+                    break;
+                case "MateriaNoInscripta":
+                    jbInscribir.setEnabled(true);
+                    jbAnularInsc.setEnabled(false);
+                    break;
             }
         }
     }//GEN-LAST:event_jtMateriasMouseReleased
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -304,19 +321,20 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbMatNoInsc;
     private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
-    private void iniTable (){
+    private void iniTable() {
         // Inicializacion de la JTable, particularmente sus Columnas
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         jtMaterias.setModel(modelo);
-        
+
     }
-    private void iniComboBox (){
+
+    private void iniComboBox() {
         //Inicializacion de la JComboBoxAlumnos
         AlumnoData alumdat = new AlumnoData();
-        Vector<Alumno> alumVector = new Vector<>(); 
-        List<Alumno> alumList =  new ArrayList<>();
+        Vector<Alumno> alumVector = new Vector<>();
+        List<Alumno> alumList = new ArrayList<>();
         alumList = alumdat.listaAlu();
         for (Alumno alumno : alumList) {
             alumVector.add(alumno);
@@ -324,20 +342,33 @@ public class FormularioInscripcionView extends javax.swing.JInternalFrame {
         comboModel = new DefaultComboBoxModel(alumVector);//Metodo recibe por parametro un Vector, por ello se utiliza un For para su asignacion
         jcbAlumnos.setModel(comboModel);
     }
-    
+
     public void toggleFormulario() {
         // Seteo de ambos botones Anular Inscripcion(JBAnularInsc) e Inscribir(JBInscribir)
         jbAnularInsc.setEnabled(false);
         jbInscribir.setEnabled(false);
     }
-    private void tableClean(){
+
+    private void tableClean() {
         //Realiza el chequeo de que la JTMaterias este vacia y si no lo esta la limpia
-        if (jtMaterias.getRowCount()!=0) {
-            int largo=jtMaterias.getRowCount()-1;
-            for(;largo>=0;largo--){
+        if (jtMaterias.getRowCount() != 0) {
+            int largo = jtMaterias.getRowCount() - 1;
+            for (; largo >= 0; largo--) {
                 modelo.removeRow(largo);
             }
         }
     }
-}
 
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/universidadg23/vistas/Imagenes/LogoULP.png")).getImage();
+            g.drawImage(imagen, 0, 0, 100, 39, this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
+}

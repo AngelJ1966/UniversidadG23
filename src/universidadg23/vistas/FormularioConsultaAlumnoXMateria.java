@@ -5,10 +5,14 @@
  */
 package universidadg23.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadg23.accesoADatos.InscripcionData;
 import universidadg23.accesoADatos.MateriaData;
@@ -21,6 +25,7 @@ import universidadg23.entidades.Materia;
  */
 public class FormularioConsultaAlumnoXMateria extends javax.swing.JInternalFrame {
 
+    FondoPanel fondo = new FondoPanel();
     private DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
     private DefaultTableModel modeloTabla = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
@@ -33,10 +38,11 @@ public class FormularioConsultaAlumnoXMateria extends javax.swing.JInternalFrame
      * Creates new form FormularioConsultaAlumnoXMateria
      */
     public FormularioConsultaAlumnoXMateria() {
+        this.setContentPane(fondo);
         initComponents();
         iniCombo();
         armarCabecera();
-        
+
     }
 
     /**
@@ -91,32 +97,31 @@ public class FormularioConsultaAlumnoXMateria extends javax.swing.JInternalFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(77, 77, 77)
+                            .addGap(90, 90, 90)
                             .addComponent(jLabel1))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
                             .addComponent(jLabel2)
                             .addGap(18, 18, 18)
-                            .addComponent(jcbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jcbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -126,13 +131,13 @@ public class FormularioConsultaAlumnoXMateria extends javax.swing.JInternalFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriaActionPerformed
-       tableClean();
-       List<Alumno> listAlu=new ArrayList<>();
-       InscripcionData inscData=new InscripcionData();
-       listAlu=inscData.obtenerAlumnosXMateria(((Materia)jcbMateria.getSelectedItem()).getIdMateria());
+        tableClean();
+        List<Alumno> listAlu = new ArrayList<>();
+        InscripcionData inscData = new InscripcionData();
+        listAlu = inscData.obtenerAlumnosXMateria(((Materia) jcbMateria.getSelectedItem()).getIdMateria());
         for (Alumno alumno : listAlu) {
-            modeloTabla.addRow(new Object[]{alumno.getIdAlumno(),alumno.getDni(),alumno.getApellido(),alumno.getNombre()});
-            
+            modeloTabla.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+
         }
     }//GEN-LAST:event_jcbMateriaActionPerformed
 
@@ -150,39 +155,52 @@ public class FormularioConsultaAlumnoXMateria extends javax.swing.JInternalFrame
     private javax.swing.JComboBox<String> jcbMateria;
     private javax.swing.JTable jtAlumnos;
     // End of variables declaration//GEN-END:variables
-    
-    private void iniCombo(){
+
+    private void iniCombo() {
         //Inicializa la comboBox jcbMateria con la materia de la BD utilizando el metodo
         //listar materia de la clase materiaData
-        
-        List <Materia> listMateria = new ArrayList<>();
-        Vector <Materia> vectorMateria = new Vector<>();
+
+        List<Materia> listMateria = new ArrayList<>();
+        Vector<Materia> vectorMateria = new Vector<>();
         MateriaData matData = new MateriaData();
-        listMateria=matData.listarMaterias();
+        listMateria = matData.listarMaterias();
         for (Materia materia : listMateria) { //recorre la lista de materias para agregarlas en el vector
             vectorMateria.add(materia);
-            
+
         }
-        modeloCombo=new DefaultComboBoxModel(vectorMateria);// usamos el vector de la linea 163 para inicializar el DCBM
+        modeloCombo = new DefaultComboBoxModel(vectorMateria);// usamos el vector de la linea 163 para inicializar el DCBM
         jcbMateria.setModel(modeloCombo);
     }
-    
-    private void armarCabecera(){// Arma la cabecera de la tabla
+
+    private void armarCabecera() {// Arma la cabecera de la tabla
         modeloTabla.addColumn("ID");
         modeloTabla.addColumn("DNI");
         modeloTabla.addColumn("Apellido");
         modeloTabla.addColumn("Nombre");
         jtAlumnos.setModel(modeloTabla);
-        
+
     }
-    
-     private void tableClean(){
+
+    private void tableClean() {
         //limpia la tabla de alumnos
-        if (jtAlumnos.getRowCount()!=0) {
-            int largo=jtAlumnos.getRowCount()-1;
-            for(;largo>=0;largo--){
+        if (jtAlumnos.getRowCount() != 0) {
+            int largo = jtAlumnos.getRowCount() - 1;
+            for (; largo >= 0; largo--) {
                 modeloTabla.removeRow(largo);
             }
+        }
+    }
+
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/universidadg23/vistas/Imagenes/LogoULP.png")).getImage();
+            g.drawImage(imagen, 0, 0, 100, 39, this);
+            setOpaque(false);
+            super.paint(g);
         }
     }
 }

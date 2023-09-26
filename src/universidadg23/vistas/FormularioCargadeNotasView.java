@@ -5,11 +5,15 @@
  */
 package universidadg23.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadg23.accesoADatos.AlumnoData;
 import universidadg23.accesoADatos.InscripcionData;
@@ -25,6 +29,7 @@ import universidadg23.entidades.Materia;
  */
 public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
 
+    FondoPanel fondo = new FondoPanel();
     private Alumno alumno;
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
@@ -35,6 +40,7 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
     };
 
     public FormularioCargadeNotasView() {
+        this.setContentPane(fondo);
         initComponents();
         armarCabecera();
         jtNombreMateria.setEnabled(false);
@@ -135,9 +141,6 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jBGuardar)
                         .addGap(227, 227, 227)
@@ -165,22 +168,24 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(138, 138, 138))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
                     .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addComponent(jBBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jlAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -238,18 +243,18 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTMateriaMouseReleased
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        double nota=Double.parseDouble(jtNota.getText());
-        nota=(int)(nota*10);
-        nota=nota/10;
-        System.out.println(nota);
+
         try {
+            double nota = Double.parseDouble(jtNota.getText());
+            nota = (int) (nota * 10);
+            nota = nota / 10;
             InscripcionData inscData = new InscripcionData();
-            if(nota>=0 && nota<=10){
-            inscData.actualizarNota(alumno.getIdAlumno(), (int) (modelo.getValueAt(jTMateria.getSelectedRow(), 0)), nota);
-            jBBuscarActionPerformed(evt);
-            jtNota.setEnabled(false);
-            jBGuardar.setEnabled(false);
-            }else{
+            if (nota >= 0 && nota <= 10) {
+                inscData.actualizarNota(alumno.getIdAlumno(), (int) (modelo.getValueAt(jTMateria.getSelectedRow(), 0)), nota);
+                jBBuscarActionPerformed(evt);
+                jtNota.setEnabled(false);
+                jBGuardar.setEnabled(false);
+            } else {
                 JOptionPane.showMessageDialog(this, "La nota ingresada debe ser entre 0 y 10");
             }
         } catch (NumberFormatException e) {
@@ -303,4 +308,16 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombreMateria;
     private javax.swing.JTextField jtNota;
     // End of variables declaration//GEN-END:variables
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/universidadg23/vistas/Imagenes/LogoULP.png")).getImage();
+            g.drawImage(imagen, 0, 0, 100, 39, this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
 }
