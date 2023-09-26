@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import universidadg23.accesoADatos.AlumnoData;
 import universidadg23.accesoADatos.InscripcionData;
 import universidadg23.accesoADatos.MateriaData;
+import universidadg23.accesoADatos.Validaciones;
 import universidadg23.entidades.Alumno;
 import universidadg23.entidades.Inscripcion;
 import universidadg23.entidades.Materia;
@@ -63,11 +64,13 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
         jtNota = new javax.swing.JTextField();
         jtDNI = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
+        jlAlumno = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Carga de Notas");
 
-        jLabel2.setText("Dni");
+        jLabel2.setText("DNI");
 
         jTMateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,11 +104,17 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Seleccione una materia para modificar la nota");
+        jLabel3.setText("Seleccione una materia para cargar la nota");
 
         jLabel4.setText("Materia");
 
         jLabel5.setText("Nota");
+
+        jtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtDNIKeyReleased(evt);
+            }
+        });
 
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +123,11 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
             }
         });
 
+        jlAlumno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jlAlumno.setForeground(new java.awt.Color(0, 51, 102));
+
+        jLabel6.setText("Alumno");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,59 +135,61 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(142, 142, 142)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jBGuardar)
+                        .addGap(227, 227, 227)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(142, 142, 142)
-                                .addComponent(jLabel1))
+                                .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBBuscar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jBGuardar)
-                                        .addGap(227, 227, 227)
-                                        .addComponent(jButton2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel2))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtNombreMateria, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                            .addComponent(jtNota)
-                                            .addComponent(jtDNI))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBBuscar)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jtNombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtNombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtNombreMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -196,6 +212,7 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
             alumno = alumData.buscarAlumnoPorDni(Integer.valueOf(jtDNI.getText()));
             if (alumno != null) {
                 tableClean();
+                jlAlumno.setText(alumno.getApellido() + ", " + alumno.getNombre());
                 InscripcionData inscDat = new InscripcionData();
                 List<Inscripcion> inscripcion = new ArrayList<>();
                 inscripcion = inscDat.listarInscripcionesPorAlumno(alumno.getIdAlumno());
@@ -221,18 +238,33 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTMateriaMouseReleased
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        double nota=Double.parseDouble(jtNota.getText());
+        nota=(int)(nota*10);
+        nota=nota/10;
+        System.out.println(nota);
         try {
             InscripcionData inscData = new InscripcionData();
-            inscData.actualizarNota(alumno.getIdAlumno(), (int) (modelo.getValueAt(jTMateria.getSelectedRow(), 0)), Double.parseDouble(jtNota.getText()));
+            if(nota>=0 && nota<=10){
+            inscData.actualizarNota(alumno.getIdAlumno(), (int) (modelo.getValueAt(jTMateria.getSelectedRow(), 0)), nota);
             jBBuscarActionPerformed(evt);
             jtNota.setEnabled(false);
             jBGuardar.setEnabled(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "La nota ingresada debe ser entre 0 y 10");
+            }
         } catch (NumberFormatException e) {
-             JOptionPane.showMessageDialog(this, "No se permiten campos vacios y/o caracter invalidos");
+            JOptionPane.showMessageDialog(this, "No se permiten campos vacios y/o caracter invalidos");
         }
 
 
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jtDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDNIKeyReleased
+        if (!jtDNI.getText().equals("") && Validaciones.validacionInmediataCaracteres(jtDNI.getText(), 1) == false) {
+            JOptionPane.showMessageDialog(this, "Solo se permiten numeros");
+            jtDNI.setText("");
+        }
+    }//GEN-LAST:event_jtDNIKeyReleased
 
     private void armarCabecera() {
 
@@ -263,8 +295,10 @@ public class FormularioCargadeNotasView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTMateria;
+    private javax.swing.JLabel jlAlumno;
     private javax.swing.JTextField jtDNI;
     private javax.swing.JTextField jtNombreMateria;
     private javax.swing.JTextField jtNota;

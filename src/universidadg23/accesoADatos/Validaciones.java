@@ -83,4 +83,23 @@ public class Validaciones {
     
     
     //VALIDACIONES DE LA VENTANA MATERIA
+      public static boolean validacionNombreMateria(String nombre) {
+        if (nombre.length() > 2 && nombre.length() < 30&& !nombre.contains("  ")) {
+            return true;
+        }  else{
+            JOptionPane.showMessageDialog(null, "El nombre ingresado es inválido");
+            return false;
+        }
+    }
+      
+          public static boolean validacionAnio(String anio) {
+        if (anio.length() == 1 && Integer.parseInt(anio)<7) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El número ingresado es inválido");
+            return false;
+        }
+    }
+
 }
+

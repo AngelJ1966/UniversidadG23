@@ -20,7 +20,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
     public jfMenuPrincipal() {
         initComponents();
         setSize(920,780);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);        
     }
 
     /**
@@ -38,6 +38,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jdEscritorio = new javax.swing.JDesktopPane();
+        jlFondo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -66,16 +67,25 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
 
         jdEscritorio.setMinimumSize(new java.awt.Dimension(400, 0));
 
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadg23/vistas/Imagenes/milad-fakurian-E8Ufcyxz514-unsplash.jpg"))); // NOI18N
+
+        jdEscritorio.setLayer(jlFondo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
         jdEscritorio.setLayout(jdEscritorioLayout);
         jdEscritorioLayout.setHorizontalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addComponent(jlFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jdEscritorioLayout.setVerticalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdEscritorioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jlFondo.getAccessibleContext().setAccessibleParent(jlFondo);
 
         jButton1.setText("jButton1");
 
@@ -193,6 +203,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.repaint();
         FormularioAlumnoView fav = new FormularioAlumnoView();
         centrarFrame(fav);
+        centrarFondo(fav);
         fav.setVisible(true);
         jdEscritorio.add(fav);
         jdEscritorio.moveToFront(fav);
@@ -214,6 +225,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.repaint();
         FormularioMateriaView fmv = new FormularioMateriaView();
         centrarFrame(fmv);
+        centrarFondo(fmv);
         fmv.setVisible(true);
         jdEscritorio.add(fmv);
         jdEscritorio.moveToFront(fmv);
@@ -225,6 +237,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.repaint();
         FormularioInscripcionView fiv = new FormularioInscripcionView();
         centrarFrame(fiv);
+        centrarFondo(fiv);        
         fiv.setVisible(true);
         jdEscritorio.add(fiv);
         jdEscritorio.moveToFront(fiv);
@@ -236,6 +249,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.repaint();
         FormularioCargadeNotasView fcnv = new FormularioCargadeNotasView();
         centrarFrame(fcnv);
+        centrarFondo(fcnv);
         fcnv.setVisible(true);
         jdEscritorio.add(fcnv);
         jdEscritorio.moveToFront(fcnv);
@@ -247,6 +261,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.repaint();
         FormularioConsultaAlumnoXMateria fcam = new FormularioConsultaAlumnoXMateria();
         centrarFrame(fcam);
+        centrarFondo(fcam);
         fcam.setVisible(true);
         jdEscritorio.add(fcam);
         jdEscritorio.moveToFront(fcam);
@@ -293,6 +308,13 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
         int y = (desktopSize.height - form.getHeight()) / 2;
         form.setLocation(x, y);
     }
+    
+    private void centrarFondo(JInternalFrame fondo){
+        Dimension desktopSize = jlFondo.getSize();
+        int x = (desktopSize.width - fondo.getWidth()) / 2;
+        int y = (desktopSize.height - fondo.getHeight()) / 2;
+        fondo.setLocation(x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -312,6 +334,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JDesktopPane jdEscritorio;
+    private javax.swing.JLabel jlFondo;
     private javax.swing.JMenuItem jmFormulario;
     private javax.swing.JMenu jmSalir;
     // End of variables declaration//GEN-END:variables

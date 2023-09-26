@@ -33,7 +33,7 @@ public class InscripcionData {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
 //               insc.setIdInscripcion(rs.getInt("idInscripcion"));
-               JOptionPane.showMessageDialog(null, "Inscripcion guardada exitosamente.");
+               JOptionPane.showMessageDialog(null, "Inscripcion realizada.");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No fue posible acceder a la columna Inscripcion" + e.getMessage());
@@ -123,7 +123,7 @@ public class InscripcionData {
                  + idMat;
          try(PreparedStatement ps = con.prepareStatement(sql)) {
              if(ps.executeUpdate() == 1) {
-                 JOptionPane.showMessageDialog(null, "Borrado exitoso");
+                 JOptionPane.showMessageDialog(null, "Inscripcion anulada");
              } else {
                  JOptionPane.showMessageDialog(null, "Inscripcion Inexistente");
              }    
