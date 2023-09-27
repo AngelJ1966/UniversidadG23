@@ -242,7 +242,7 @@ public class jfMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // Sobre el producto
-        JOptionPane.showMessageDialog(null, "Proyecto Transversal para la Universidad de la Punta\n\nGrupo 23:\nCabral Lucas\nCarabetta Jonathan\nJuarez Algel\nPerez Mauro\n\n© 2023 Universidad de la Punta");
+        JOptionPane.showMessageDialog(null, "Proyecto Transversal para la Universidad de la Punta\n\nGrupo 23:\nCabral Lucas\nCarabetta Jonathan\nJuárez Angel\nPerez Mauro\n\n© 2023 Universidad de la Punta");
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
